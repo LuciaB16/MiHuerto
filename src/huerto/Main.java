@@ -4,13 +4,12 @@ import huerto.macetas.MacetaRectangular;
 import huerto.macetas.MacetaTubular;
 import huerto.macetas.Maceta;
 import huerto.plantas.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-
     private static final int NUM_ZANAHORIAS = 5;
+
     public static void main(String[] args) {
         Huerto miHuerto = new Huerto("Mi primer huerto");
         Maceta cuadrada = new MacetaRectangular("Cuadrada", 20, 20, 20);

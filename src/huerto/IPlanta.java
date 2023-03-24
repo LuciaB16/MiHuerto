@@ -5,7 +5,6 @@ import huerto.enums.Familia;
 
 public interface IPlanta {
     String getNombre();
-
     int getSuperficieRequerid();
     int getVolumenRequerido();
 

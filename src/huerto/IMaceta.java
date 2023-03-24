@@ -5,7 +5,6 @@ import java.util.Set;
 
 public interface IMaceta {
     String getNombre();
-
     int getVolumen();
     int volumenDisponible();
     int getSuperficie();

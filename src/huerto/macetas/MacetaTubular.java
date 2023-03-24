@@ -12,7 +12,7 @@ public class MacetaTubular extends Maceta{
 
     @Override
     public int getSuperficie() {
-        return super.getSuperficie();
+        return (int) (Math.PI * (diametro/2) * (diametro/2));
     }
 
     @Override

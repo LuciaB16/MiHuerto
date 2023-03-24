@@ -25,9 +25,13 @@ public class Huerto implements IHuerto{
         return null;
     }
 
-    //arreglar
     @Override
     public String toString() {
-        return super.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Huerto: " + nombre + "\n");
+        for(IMaceta maceta : macetas){
+            sb.append("\t" + maceta + "\n");
+        }
+        return sb.toString();
     }
 }

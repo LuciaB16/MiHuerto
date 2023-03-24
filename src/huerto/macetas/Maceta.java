@@ -1,9 +1,7 @@
 package huerto.macetas;
 
-import com.sun.security.jgss.GSSUtil;
 import huerto.IMaceta;
 import huerto.IPlanta;
-import huerto.enums.FormaMaceta;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,18 +29,16 @@ public abstract class Maceta implements IMaceta {
     }
 
     @Override
-    public int volumenDisponible() {
-        return 0;
-    }
-
-    @Override
-    public int getSuperficie() {
-        return 0;
-    }
-
-    @Override
     public int superficieDisponible() {
-        return 0;
+        return getSuperficie() - superficieOcupada();
+    }
+
+    public int superficieOcupada() {
+        int res = 0;
+        for (IPlanta p : plantas) {
+            res += p.getSuperficieRequerid();
+        }
+        return res;
     }
 
     @Override
@@ -51,8 +47,16 @@ public abstract class Maceta implements IMaceta {
     }
 
     @Override
-    public FormaMaceta getForma() {
-        return null;
+    public int volumenDisponible() {
+        return getVolumen() - volumenOcupado();
+    }
+
+    public int volumenOcupado() {
+        int res = 0;
+        for (IPlanta p : plantas) {
+            res += p.getVolumenRequerido();
+        }
+        return res;
     }
 
     @Override
@@ -80,6 +84,20 @@ public abstract class Maceta implements IMaceta {
 
     @Override
     public Set<IPlanta> getPlantas() {
-        return null;
+        return plantas;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Maceta " + nombre + "{" + getForma() +
+                "} (sup " + getSuperficie() + "cm2 - vo1 " + getVolumen() + "cm3).\n");
+        if (plantas.isEmpty()) {
+            sb.append("\t\tvacia\n");
+        }
+        for (IPlanta p : plantas) {
+            sb.append("\t\t" + p + "\n");
+        }
+        sb.append("\t\t>> Disponible sup " + superficieDisponible() + "cm2 - vo1 " + volumenDisponible() + "cm3");
+        return sb.toString();
     }
 }

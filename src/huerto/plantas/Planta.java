@@ -100,19 +100,11 @@ public abstract class Planta implements IPlanta {
         this.familia = familia;
     }
 
-    //arreglar
     @Override
     public String toString() {
-        return "Planta{" +
-                "especie=" + especie +
-                ", familia=" + familia +
-                ", incompatibles=" + incompatibles +
-                ", compatibles=" + compatibles +
-                ", nombre='" + nombre + '\'' +
-                ", superficieRequerida=" + superficieRequerida +
-                ", volumenRequerido=" + volumenRequerido +
-                ", fechaSiembra=" + fechaSiembra +
-                ", maceta=" + maceta +
-                '}';
+        return "Planta " + nombre + " [especie=" + especie + ", familia=" + familia +
+                ", superficieRequerida=" + superficieRequerida + ", volumenRequerido=" +
+                ", incompatibles=" + incompatibles + ", fechaSiembra=" + fechaSiembra +
+                (maceta != null ? ", maceta=" + maceta.getNombre() : "") + "]";
     }
 }
