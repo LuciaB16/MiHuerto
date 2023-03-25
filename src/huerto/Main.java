@@ -116,23 +116,82 @@ public class Main {
         int numeroMacetas = PedirDatos.pedirInt("¿Cuántas macetas quieres tener en tu huerto?");
         for (int i = 0; i < numeroMacetas; i++) {
             int tipoMaceta = PedirDatos.pedirInt("¿De qué tipo quieres la maceta?\n1.Rectangular\n2.Tubular");
-            do {
                 String nombreMaceta = PedirDatos.pedirString("Nombre de la maceta: ");
                 int altoMaceta = PedirDatos.pedirInt("Alto de la maceta: ");
                 if (tipoMaceta == 1) {
-                    int anchoMaceta = PedirDatos.pedirInt("Ancho de la maceta: ");
-                    int largoMaceta = PedirDatos.pedirInt("Alto de la maceta: ");
+                    int anchoMaceta = PedirDatos.pedirInt("Largo de la maceta: ");
                     Maceta maceta1 = new MacetaRectangular(nombreMaceta, altoMaceta, anchoMaceta, altoMaceta);
                     miHuerto.addMaceta(maceta1);
+                    int tipoPlanta = PedirDatos.pedirInt("¿Qué tipo de planta quieres en esta maceta?" +
+                            "\n1.Tomates\n2.Mangos\n3.Lechugas\n4.Zanahorias");
+                    switch (tipoPlanta){
+                        case 1:
+                            int numTomates = PedirDatos.pedirInt("¿Cuantos tomates quieres?");
+                            List<Tomate> tomates = new ArrayList<>();
+                            for(int j=0; j<numTomates;j++){
+                                Tomate tomate = new Tomate("tomate" + j);
+                                tomates.add(tomate);
+                            }
+                            for(Tomate t : tomates){
+                                IMaceta macetaT = miHuerto.plantar(t);
+                                amosar(t,macetaT);
+                            }
+                            break;
+                        case 2:
+                            int numMangos = PedirDatos.pedirInt("¿Cuantos mangos quieres?");
+                            List<Mango> mangos = new ArrayList<>();
+                            for(int j=0; j<numMangos;j++){
+                                Mango mango = new Mango("mango" + j);
+                                mangos.add(mango);
+                            }
+                            for(Mango m : mangos){
+                                IMaceta macetaM = miHuerto.plantar(m);
+                                amosar(m,macetaM);
+                            }
+                            break;
+                        case 3:
+                            int numLechugas = PedirDatos.pedirInt("¿Cuantos lechugas quieres?");
+                            List<Lechuga> lechugas = new ArrayList<>();
+                            for(int j=0; j<numLechugas;j++){
+                                Lechuga lechuga = new Lechuga("lechuga" + j);
+                                lechugas.add(lechuga);
+                            }
+                            for(Lechuga l : lechugas){
+                                IMaceta macetaL = miHuerto.plantar(l);
+                                amosar(l,macetaL);
+                            }
+                            break;
+                        case 4:
+                            int numZanahorias = PedirDatos.pedirInt("¿Cuantos zanahorias quieres?");
+                            List<Zanahoria> zanahorias = new ArrayList<>();
+                            for(int j=0; j<numZanahorias;j++){
+                                Zanahoria zanahoria = new Zanahoria("zanahoria" + j);
+                                zanahorias.add(zanahoria);
+                            }
+                            for(Zanahoria z : zanahorias){
+                                IMaceta macetaZ = miHuerto.plantar(z);
+                                amosar(z,macetaZ);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 if (tipoMaceta == 2) {
                     int diametroMaceta = PedirDatos.pedirInt("Diametro de la maceta: ");
                     Maceta maceta2 = new MacetaTubular(nombreMaceta, altoMaceta, diametroMaceta);
                     miHuerto.addMaceta(maceta2);
                 }
-            }while(tipoMaceta != 1 && tipoMaceta != 2);
         }
+        //System.out.println(miHuerto);
 
+        System.out.println(miHuerto + " con muchas plantas");
+
+
+        File file =new File("huerto.txt");
+        FileWriter writer = new FileWriter(file);
+        writer.write(String.valueOf(miHuerto));
+        writer.close();
         //Maceta cuadrada = new MacetaRectangular("Cuadradita", 20, 20, 20);
         //Maceta botella = new MacetaTubular("Botella", 25, 15);
         //Maceta maceton = new MacetaTubular("Maceton", 40, 40);
@@ -140,7 +199,7 @@ public class Main {
         //miHuerto.addMaceta(botella);
         //miHuerto.addMaceta(maceton);
 
-        System.out.println(miHuerto);
+        //System.out.println(miHuerto);
         /*
         IPlanta tomatitos = new Tomate("tomatitos");
         IPlanta zanahoria = new Zanahoria("larguita");
