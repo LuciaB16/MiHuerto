@@ -101,7 +101,7 @@ public abstract class Planta implements IPlanta {
     @Override
     public String toString() {
         return "Planta " + nombre + " [especie=" + especie + ", familia=" + familia +
-                ", superficieRequerida=" + superficieRequerida + ", volumenRequerido=" +
+                ", superficieRequerida=" + superficieRequerida + ", volumenRequerido=" + volumenRequerido +
                 ", incompatibles=" + incompatibles + (maceta != null ? ", maceta=" + maceta.getNombre() : "") + "]";
     }
 }
