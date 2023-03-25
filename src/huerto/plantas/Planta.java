@@ -18,7 +18,6 @@ public abstract class Planta implements IPlanta {
     private String nombre;
     private int superficieRequerida;
     private int volumenRequerido;
-    private Date fechaSiembra;
     private IMaceta maceta;
 
     protected Planta(String nombre, int distancia, int litros) {
@@ -32,9 +31,9 @@ public abstract class Planta implements IPlanta {
     @Override
     public boolean esCompatible(IPlanta planta) {
         boolean compatible = true;
-        if(!especie.equals(planta.getEspecie())){
-            if(!compatibles.contains(planta.getEspecie())){
-                compatible &= !familia.equals(planta.getFamilia());
+        if(!especie.equals(planta.getEspecie())){ //comprueba que sean de la misma especie
+            if(!compatibles.contains(planta.getEspecie())){ //
+                compatible &= !familia.equals(planta.getFamilia()); //comprueba si las familias son diferentes
                 compatible &= !incompatibles.contains(planta.getEspecie());
             }
         }
@@ -45,18 +44,17 @@ public abstract class Planta implements IPlanta {
     public boolean tengoEspacio(IMaceta maceta) {
         boolean superficieOk = maceta.superficieDisponible() > getSuperficieRequerida();
         if(!superficieOk){
-            System.out.println("--- Superficie ko para " + getNombre() + " en " + maceta.getNombre());
+            System.out.println("--- Superficie insuficiente para " + getNombre() + " en " + maceta.getNombre());
         }
         boolean volumenOk = maceta.volumenDisponible() > getVolumenRequerido();
         if(!volumenOk){
-            System.out.println("--- Volumen ko para " + getNombre() + " en " + maceta.getNombre());
+            System.out.println("--- Volumen insuficiente para " + getNombre() + " en " + maceta.getNombre());
         }
         return superficieOk && volumenOk;
     }
 
     @Override
     public void plantar(IMaceta maceta) {
-        fechaSiembra = new Date();
         this.maceta = maceta;
     }
 
@@ -104,7 +102,6 @@ public abstract class Planta implements IPlanta {
     public String toString() {
         return "Planta " + nombre + " [especie=" + especie + ", familia=" + familia +
                 ", superficieRequerida=" + superficieRequerida + ", volumenRequerido=" +
-                ", incompatibles=" + incompatibles + ", fechaSiembra=" + fechaSiembra +
-                (maceta != null ? ", maceta=" + maceta.getNombre() : "") + "]";
+                ", incompatibles=" + incompatibles + (maceta != null ? ", maceta=" + maceta.getNombre() : "") + "]";
     }
 }

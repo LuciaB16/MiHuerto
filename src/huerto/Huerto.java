@@ -1,5 +1,8 @@
 package huerto;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,10 +31,25 @@ public class Huerto implements IHuerto{
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Huerto: " + nombre + "\n");
+        sb.append(nombre + "\n");
         for(IMaceta maceta : macetas){
             sb.append("\t" + maceta + "\n");
         }
         return sb.toString();
     }
+
+
+    public void escribir(File fichero){
+        FileWriter ou = null;
+        PrintWriter fich = null;
+        try {
+             ou = new FileWriter(fichero);
+             fich =new PrintWriter(ou);
+        }catch (Exception e){
+            System.out.println("Error escr" + e.getMessage());
+        }finally {
+            fich.close();
+        }
+    }
+
 }

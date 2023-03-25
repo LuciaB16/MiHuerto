@@ -24,7 +24,7 @@ public abstract class PlantaRaiz extends Planta{
     public boolean tengoEspacio(IMaceta maceta) {
         boolean profundidadOk = maceta.getProfundidad() > profundidadRequerida;
         if(!profundidadOk){
-            System.out.println("--- Profundidad ko para " + getNombre() + " en " + maceta.getNombre());
+            System.out.println("--- Profundidad insuficiente para " + getNombre() + " en " + maceta.getNombre());
         }
         return super.tengoEspacio(maceta) && profundidadOk;
     }
