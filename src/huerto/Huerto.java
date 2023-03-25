@@ -2,6 +2,7 @@ package huerto;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
@@ -45,8 +46,8 @@ public class Huerto implements IHuerto{
         try {
              ou = new FileWriter(fichero);
              fich =new PrintWriter(ou);
-        }catch (Exception e){
-            System.out.println("Error escr" + e.getMessage());
+        }catch (IOException e){
+            System.out.println("Error de escritura" + e.getMessage());
         }finally {
             fich.close();
         }
