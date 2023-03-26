@@ -163,7 +163,6 @@ public class Sistema {
                 }
                 }
         }
-        //System.out.println(miHuerto + " con muchas plantas");
 
         File f =new File("huerto.txt");
         FileWriter writer = new FileWriter(f);
