@@ -27,11 +27,6 @@ public abstract class Maceta implements IMaceta {
         return alto * getSuperficie();
     }
 
-    @Override
-    public int superficieDisponible() {
-        return getSuperficie() - superficieOcupada();
-    }
-
     public int superficieOcupada() {
         int acu = 0;
         for (IPlanta p : plantas) {
@@ -41,14 +36,15 @@ public abstract class Maceta implements IMaceta {
     }
 
     @Override
+    public int superficieDisponible() {
+        return getSuperficie() - superficieOcupada();
+    }
+
+   @Override
     public int getProfundidad() {
         return alto;
     }
 
-    @Override
-    public int volumenDisponible() {
-        return getVolumen() - volumenOcupado();
-    }
 
     public int volumenOcupado() {
         int acu = 0;
@@ -59,21 +55,29 @@ public abstract class Maceta implements IMaceta {
     }
 
     @Override
+    public int volumenDisponible() {
+        return getVolumen() - volumenOcupado();
+    }
+
+    @Override
     public boolean plantar(IPlanta planta) {
         System.out.println("---Plantando " + planta.getNombre() + " en " + this.getNombre());
 
         boolean compatiblesOk = true;
-        for(IPlanta p : plantas){
+
+        for(IPlanta p : plantas) {
             boolean compatibleOk = planta.esCompatible(p);
-            if (!compatiblesOk){
-                System.out.println("--- " + p.getNombre() + " no es compatible con " + planta.getNombre());
+            if (!compatiblesOk) {
+                System.out.println("-- " + p.getNombre() + " no es compatible con " + planta.getNombre());
             }
             compatibleOk &= compatiblesOk;
         }
+
         boolean cabe = false;
         if(compatiblesOk){
             cabe = planta.tengoEspacio(this);
         }
+
         if(cabe){
             plantas.add(planta);
             planta.plantar(this);
@@ -88,15 +92,15 @@ public abstract class Maceta implements IMaceta {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Maceta " + nombre + " tipo: " + getForma() +
-                "[superficie = " + getSuperficie() + " cm2 y volumen = " + getVolumen() + " cm3]\n");
+        StringBuilder sb = new StringBuilder("Maceta: " + nombre + ", tipo: " + getForma() +
+                " [superficie = " + getSuperficie() + " cm2 y volumen = " + getVolumen() + " cm3]\n");
         if (plantas.isEmpty()) {
             sb.append("\t\tEsta maceta está vacía -> ");
         }
         for (IPlanta p : plantas) {
             sb.append("\t\t" + p + "\n");
         }
-        sb.append("Disponible: superficie " + superficieDisponible() + "cm2 y volumen " + volumenDisponible() + "cm3");
+        sb.append("Disponible: superficie " + superficieDisponible() + "cm2 y volumen " + volumenDisponible() + "cm3.\n");
         return sb.toString();
     }
 }

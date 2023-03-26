@@ -1,9 +1,5 @@
 package huerto;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,7 +20,8 @@ public class Huerto implements IHuerto{
     @Override
     public IMaceta plantar(IPlanta planta) {
         for(IMaceta maceta : macetas){
-            if(maceta.plantar(planta)) return maceta;
+            if(maceta.plantar(planta))
+                return maceta;
         }
         return null;
     }
@@ -39,18 +36,5 @@ public class Huerto implements IHuerto{
         return sb.toString();
     }
 
-
-    public void escribir(File fichero){
-        FileWriter ou = null;
-        PrintWriter fich = null;
-        try {
-             ou = new FileWriter(fichero);
-             fich =new PrintWriter(ou);
-        }catch (IOException e){
-            System.out.println("Error de escritura" + e.getMessage());
-        }finally {
-            fich.close();
-        }
-    }
 
 }

@@ -5,7 +5,6 @@ import huerto.IPlanta;
 import huerto.enums.Especie;
 import huerto.enums.Familia;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,11 +43,11 @@ public abstract class Planta implements IPlanta {
     public boolean tengoEspacio(IMaceta maceta) {
         boolean superficieOk = maceta.superficieDisponible() > getSuperficieRequerida();
         if(!superficieOk){
-            System.out.println("--- Superficie insuficiente para " + getNombre() + " en " + maceta.getNombre());
+            System.out.println("-- Superficie insuficiente para " + getNombre() + " en la maceta: " + maceta.getNombre());
         }
         boolean volumenOk = maceta.volumenDisponible() > getVolumenRequerido();
         if(!volumenOk){
-            System.out.println("--- Volumen insuficiente para " + getNombre() + " en " + maceta.getNombre());
+            System.out.println("-- Volumen insuficiente para " + getNombre() + " en la maceta:" + maceta.getNombre());
         }
         return superficieOk && volumenOk;
     }
@@ -100,8 +99,8 @@ public abstract class Planta implements IPlanta {
 
     @Override
     public String toString() {
-        return "Planta " + nombre + " [especie=" + especie + ", familia=" + familia +
+        return "La planta " + nombre + " tiene las siguientes características:\n\t[especie=" + especie + ", familia=" + familia +
                 ", superficieRequerida=" + superficieRequerida + ", volumenRequerido=" + volumenRequerido +
-                ", incompatibles=" + incompatibles + (maceta != null ? ", maceta=" + maceta.getNombre() : "") + "]";
+                ", incompatibles=" + incompatibles + (maceta != null ? ", maceta=" + maceta.getNombre() : "") + "]\n";
     }
 }
